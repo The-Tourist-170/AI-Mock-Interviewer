@@ -1,0 +1,15 @@
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Config/GeminiProperties.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Config/WebConfig.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Controller/InterviewController.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Dto/ChatRequest.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Dto/ChatResponse.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Dto/StartInterviewResponse.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Models/ChatMessage.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Models/InterviewSession.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Models/MessageSender.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Models/SessionStatus.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Repository/ChatMessageRepository.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Repository/InterviewSessionRepository.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/ServerApplication.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Service/GeminiService.java
+/home/kan3ki/Documents/cn/server/src/main/java/com/cn/server/Service/InterviewService.java

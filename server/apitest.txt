@@ -1,0 +1,61 @@
+### **Phase 2: Backend API Development (Continued - Testing)**
+
+With the backend code compiled and ready, we need to validate the API endpoints before moving to 
+frontend integration. We'll use Postman for this, as it's quick and effective for REST testing. 
+This fits within the remaining time in Phase 2 (allocate 0.5 hours for testing). 
+Assume the app is running locally (e.g., via `mvn spring-boot:run` or your IDE on port 
+8080—adjust if customized). Ensure your PostgreSQL is up (via Docker) and `application.properties` 
+has the Gemini API key and DB config set.
+
+* **Prerequisites (5 minutes):**
+  - Run the Spring Boot app: `mvn spring-boot:run` or start from IDE. Confirm it's listening at 
+  `http://localhost:8080`.
+  - Open Postman (download from postman.com if not installed).
+  - Create a new collection named "Excel Interview API" for organized testing.
+  - No authentication needed for MVP—endpoints are open.
+
+* **Step-by-Step Testing in Postman (25 minutes):**
+  1. **Test Starting an Interview (`POST /api/v1/interviews`):**
+     - Create a new request in Postman: Method = POST, URL = 
+     `http://localhost:8080/api/v1/interviews`.
+     - No body required (empty request).
+     - Send the request. Expected response: 200 OK with JSON like `{"id": "uuid-here", 
+     "startTime": "timestamp", "status": "ACTIVE"}`.
+     - Copy the `id` from the response—this is your session ID for subsequent tests.
+     - Verify: Check the database (via pgAdmin or SQL query) for a new `InterviewSession` 
+     entry and an initial AI message in `ChatMessage`.
+
+  2. **Test Sending a User Message (`POST /api/v1/interviews/{id}/chat`):**
+     - New request: Method = POST, URL = `http://localhost:8080/api/v1/interviews/{sessionId}/chat` 
+     (replace `{sessionId}` with the ID from step 1).
+     - Body: Select "raw" > "Text", enter a sample message like "Hello, let's start with basic 
+     formulas." (no JSON wrapping—endpoint expects plain string).
+     - Send the request. Expected response: 200 OK with JSON for the AI's `ChatMessage`, e.g., 
+     `{"id": "uuid", "sender": "AI", "message": "Evaluation: ...\n\nNext question...", "evaluation": "Correct"}`.
+     - Repeat 3-4 times with different messages to simulate a full conversation 
+     (e.g., answer questions posed by AI).
+     - Verify: Query the DB for updated `ChatMessage` rows; ensure Gemini evaluations are 
+     parsed and stored correctly.
+
+  3. **Test Generating the Report (`GET /api/v1/interviews/{id}/report`):**
+     - New request: Method = GET, URL = 
+     `http://localhost:8080/api/v1/interviews/{sessionId}/report` (use the same ID).
+     - No body or params needed.
+     - Send the request. Expected response: 200 OK with plain text report, e.g., "Performance 
+     Summary: Overall score 8/10...".
+     - Note: This ends the session (status changes to COMPLETED); retrying the same ID should throw 
+     an error (e.g., "Session already completed").
+     - Verify: DB shows `endTime` set and status updated; report reflects the conversation history.
+
+* **Troubleshooting & Edge Cases (10 minutes):**
+  - Errors? Check console logs for exceptions (e.g., Gemini API failures—verify key/quota; DB 
+  issues—confirm connection).
+  - Invalid ID: Test with fake UUID; expect 404 or "Session not found".
+  - Inactive session: After report, send chat—expect error.
+  - Long messages: Test with detailed responses to ensure prompt engineering handles context.
+  - If Postman shows CORS errors (unlikely locally), add `@CrossOrigin` to the controller 
+  temporarily.
+
+Once these tests pass (aim for 2-3 full cycles), the backend is validated. Commit changes with 
+"Phase 2 complete: Backend tested via Postman". Proceed to Phase 3: Frontend Development—scaffold 
+with `npm create vite@latest frontend -- --template react`.

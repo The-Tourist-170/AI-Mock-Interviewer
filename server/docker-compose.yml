@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: admin  # Actual user
+      POSTGRES_PASSWORD: secret  # Actual password
+      POSTGRES_DB: excel_interviewer_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d excel_interviewer_db"]  # Update user here
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  backend:
+    image: excel-interviewer-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/excel_interviewer_db
+      SPRING_DATASOURCE_USERNAME: admin  # Match DB user
+      SPRING_DATASOURCE_PASSWORD: secret  # Match DB password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+volumes:
+  db-data:

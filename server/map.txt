@@ -1,0 +1,82 @@
+Excellent. Given the 10-hour deadline and your specified tech stack, we need an aggressive and highly focused plan. Here is the phase-by-phase roadmap to build and deliver this project. We will prioritize a Minimum Viable Product (MVP) that meets all the core requirements.
+
+---
+
+### **Phase 1: Foundation & Design (2 Hours)**
+
+This phase is about planning and setup. Getting this right will save a lot of time later.
+
+* **Task 1: Design Document & Strategy (1.5 hours)**
+    * [cite_start]This is a core deliverable[cite: 22]. We'll create a concise Markdown document (`DESIGN.md`).
+    * **Architecture:** Define a simple three-tier architecture: React Frontend ↔ Spring Boot REST API ↔ PostgreSQL Database. The Spring Boot application will handle all logic, including calls to the Gemini API.
+    * [cite_start]**Tech Stack Justification[cite: 29]:** We'll justify the stack based on your expertise and its suitability for rapid development.
+        * **Spring Boot:** For building a robust, secure REST API quickly.
+        * **React:** For creating a dynamic, single-page application for the chat interface.
+        * **PostgreSQL:** A reliable relational database for storing interview transcripts.
+        * **Gemini AI:** A powerful LLM capable of conversational logic, evaluation, and instruction following, which is perfect for our agent.
+    * [cite_start]**"Cold Start" Solution[cite: 30]:** We'll address this by using **advanced prompt engineering**. Our strategy is to create a detailed "meta-prompt" or system prompt that instructs Gemini on its persona, the interview structure, question progression, and how to evaluate answers on the fly. This bypasses the need for a pre-existing dataset for the PoC.
+    * **Database Schema:** Define two simple tables: `InterviewSession` (to track each interview) and `ChatMessage` (to store the turn-by-turn conversation).
+
+* **Task 2: Project Scaffolding (0.5 hours)**
+    * Initialize a Git repository.
+    * Use Spring Initializr to create the backend project with `Web`, `JPA`, `PostgreSQL Driver`, and `Lombok` dependencies.
+    * Use `Vite` to quickly scaffold the React frontend project.
+    * Set up a local PostgreSQL instance using Docker.
+
+---
+
+### **Phase 2: Backend API Development (3 Hours)**
+
+This is the engine of our application. We'll focus on the API and the core AI logic.
+
+* **Task 1: Database Models & API Endpoints (1 hour)**
+    * Create JPA entities and repositories for `InterviewSession` and `ChatMessage`.
+    * Build the REST Controller with essential endpoints:
+        * `POST /api/v1/interviews`: To start a new interview.
+        * `POST /api/v1/interviews/{id}/chat`: To send a user message and get the AI's response.
+        * [cite_start]`GET /api/v1/interviews/{id}/report`: To conclude the interview and generate the final report[cite: 20].
+
+* **Task 2: Gemini Integration & Prompt Engineering (2 hours)**
+    * This is the most critical step. Create a `GeminiService` in Spring Boot.
+    * **Main Interview Prompt:** We will design a comprehensive system prompt that commands the Gemini model to:
+        1.  [cite_start]Act as an expert Excel interviewer named 'Alex'[cite: 18].
+        2.  [cite_start]Follow a structured flow: introduction, 3-4 questions of increasing difficulty, and conclusion[cite: 15, 16].
+        3.  [cite_start]Evaluate the user's previous answer *before* asking the next question[cite: 17]. We'll instruct it to provide a brief, one-line evaluation (e.g., "Correct," "Partially correct," "That's not quite right").
+        4.  Manage the conversation history to ask relevant follow-up questions.
+    * **Report Generation Prompt:** Create a second, separate prompt for the `/report` endpoint. This prompt will take the entire chat history as input and ask Gemini to generate a structured performance summary.
+
+#### Brief
+
+---
+
+### **Phase 3: Frontend Development (3 Hours)**
+
+We'll build a clean, functional chat interface.
+
+* **Task 1: UI Components (1.5 hours)**
+    * Build a main `Chat` component.
+    * Create child components for the message list and the message input form.
+    * Use a simple CSS framework like Tailwind CSS for quick styling to make it look professional.
+
+* **Task 2: State Management & API Calls (1.5 hours)**
+    * Use React hooks (`useState`, `useEffect`) to manage the conversation state.
+    * Use `axios` to connect to the Spring Boot backend endpoints.
+    * Implement the logic to start an interview, display the conversation, and fetch the final report on a separate modal or page.
+
+---
+
+### **Phase 4: Deployment & Finalization (2 Hours)**
+
+The final push to get the project live and documented.
+
+* **Task 1: Deployment (1.5 hours)**
+    * **Backend:** Containerize the Spring Boot app with a `Dockerfile` and deploy it on a service like **Render** or **Fly.io**. We'll also provision a free-tier PostgreSQL database from one of these providers.
+    * **Frontend:** Deploy the static React build to **Netlify** or **Vercel**. This is extremely fast and free.
+    * Configure CORS on the backend to allow requests from the frontend domain.
+
+* **Task 2: Testing and Documentation (0.5 hours)**
+    * [cite_start]Conduct 2-3 full mock interviews to test the flow and generate sample transcripts[cite: 27].
+    * Add the deployed links, sample transcripts, and setup instructions to the `README.md` and the `DESIGN.md` document.
+    * [cite_start]Submit the repository link as the final deliverable[cite: 24].
+
+Let's get started. We should begin with **Phase 1, Task 1: Outlining the Design Document**.
