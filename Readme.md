@@ -10,9 +10,9 @@ Key Features:
 - Storage of interview sessions and messages in a database.
 - Final report summarizing performance.
 
-The project is built with a backend in Spring Boot, frontend in React, PostgreSQL database, and Gemini AI for natural language processing.
+The project is built with a backend in Spring Boot, a frontend in React, a PostgreSQL database, and Gemini AI for natural language processing.
 
-For Design Document & Approach Strategy [https://docs.google.com/document/d/1jOVeloPpWW4m2tiuzN4S4MQLZIrfqYe-llOKfrXg97g/edit?usp=sharing](click here).
+For Design Document & Approach Strategy [click here](https://docs.google.com/document/d/1jOVeloPpWW4m2tiuzN4S4MQLZIrfqYe-llOKfrXg97g/edit?usp=sharing).
 
 ## Tech Stack
 
@@ -67,7 +67,7 @@ To install:
 ### Frontend
 1. Run development server: `npm run dev`.
 2. App runs on `http://localhost:5173` (Vite default).
-3. Update API base in frontend code to `http://localhost:8080/api/v1`.
+3. Update the API base in frontend code to `http://localhost:8080/api/v1`.
 
 ### Full Stack with Docker
 - Use `docker-compose up` to start backend + DB.
@@ -76,8 +76,8 @@ To install:
 ## Deployment Details
 
 - **Database:** Deployed on Render (PostgreSQL free tier). DB: excel_interviewer_db, User: admin.
-- **Backend Server:** Deployed on Render (free tier) at ([Server](https://server-ai-mock-interviewer.onrender.com)).
-- **Frontend Client:** Deployed on Vercel at ([Client]([https://ai-mock-interviewer-one-pearl.vercel.app/](https://ai-mock-interviewer-ku72pqujv-thetourist170s-projects.vercel.app/))).
+- **Backend Server:** Deployed on Render (free tier) at [Server](https://server-ai-mock-interviewer.onrender.com).
+- **Frontend Client:** Deployed on Vercel at [Client]([https://ai-mock-interviewer-one-pearl.vercel.app/](https://ai-mock-interviewer-ku72pqujv-thetourist170s-projects.vercel.app/).
 
 **Note:** The deployed link may be slow or experience startup delays due to limitations of the Render free tier account (e.g., cold starts after inactivity, taking 30-60 seconds). For better performance, consider upgrading to a paid tier.
 
