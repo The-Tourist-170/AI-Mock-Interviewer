@@ -76,8 +76,8 @@ To install:
 ## Deployment Details
 
 - **Database:** Deployed on Render (PostgreSQL free tier). DB: excel_interviewer_db, User: admin.
-- **Backend Server:** Deployed on Render (free tier) at [https://server-ai-mock-interviewer.onrender.com](Server).
-- **Frontend Client:** Deployed on Vercel at [https://ai-mock-interviewer-one-pearl.vercel.app](Client).
+- **Backend Server:** Deployed on Render (free tier) at ([Server](https://server-ai-mock-interviewer.onrender.com)).
+- **Frontend Client:** Deployed on Vercel at ([Client]([https://ai-mock-interviewer-one-pearl.vercel.app/](https://ai-mock-interviewer-ku72pqujv-thetourist170s-projects.vercel.app/))).
 
 **Note:** The deployed link may be slow or experience startup delays due to limitations of the Render free tier account (e.g., cold starts after inactivity, taking 30-60 seconds). For better performance, consider upgrading to a paid tier.
 
